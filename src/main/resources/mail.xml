@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="defaultAuthenticator" class="org.apache.commons.mail.DefaultAuthenticator">
+		<constructor-arg type="java.lang.String" value="huang_f%worksap.co.jp" />
+		<constructor-arg type="java.lang.String" value="HuAnUvmT" />
+	</bean>
+	<bean id="email" class="org.apache.commons.mail.SimpleEmail">
+		<property name="hostName">
+			<value>smtp.securemx.jp</value>
+		</property>
+		<property name="SSLOnConnect">
+			<value>true</value>
+		</property>
+		<property name="authenticator" ref="defaultAuthenticator">
+		</property>
+	</bean>
+
+</beans>

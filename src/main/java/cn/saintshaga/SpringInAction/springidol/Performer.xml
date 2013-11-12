@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+	<context:component-scan 
+		base-package="cn.saintshaga.SpringInAction.springidol">
+		<context:include-filter type="assignable" 
+			expression="cn.saintshaga.SpringInAction.springidol.Instrument"/>
+	</context:component-scan>
+	
+	<bean id="audience" class="cn.saintshaga.SpringInAction.springidol.Audience">
+	</bean>
+	<aop:config>
+		<aop:aspect ref="audience">
+			<aop:pointcut id="performance" expression="execution(* cn.saintshaga.SpringInAction.springidol.Performer.perform(..))" />
+			<aop:before pointcut-ref="performance"
+				method="takeSeats" />
+			<aop:before pointcut-ref="performance"
+				method="turnOffCellPhones" />
+			<aop:after-returning pointcut-ref="performance"
+				method="applaud" />
+			<aop:after-throwing pointcut-ref="performance"
+				method="demandRefund" />
+
+		</aop:aspect>
+	</aop:config>
+<!--	<context:annotation-config />
+ 	
+	<bean id="duke" class="cn.saintshaga.SpringInAction.springidol.impl.Juggler">
+		<constructor-arg value="15" />
+	</bean>
+	<bean id="sonnet29" class="cn.saintshaga.SpringInAction.springidol.impl.Sonnet29"></bean>
+	<bean id="poeticDuke" class="cn.saintshaga.SpringInAction.springidol.impl.PoeticJuggler">
+		<constructor-arg value="13"></constructor-arg>
+		<constructor-arg ref="sonnet29"></constructor-arg>
+	</bean>
+	<bean class="cn.saintshaga.SpringInAction.springidol.impl.Saxophone">
+	</bean>
+	<bean id="kenny"
+		class="cn.saintshaga.SpringInAction.springidol.impl.Instrumentalist">
+	</bean>
+ -->	
+</beans>
