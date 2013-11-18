@@ -12,9 +12,36 @@
 		<context:include-filter type="assignable" 
 			expression="cn.saintshaga.SpringInAction.springidol.Instrument"/>
 	</context:component-scan>
-	
-	<bean id="audience" class="cn.saintshaga.SpringInAction.springidol.Audience">
-	</bean>
+	<aop:aspectj-autoproxy>
+	</aop:aspectj-autoproxy>
+ <!--
+	<aop:config>
+		<aop:aspect>
+			<aop:declare-parents 
+				types-matching="cn.saintshaga.SpringInAction.springidol.Performer+"
+				implement-interface="cn.saintshaga.SpringInAction.springidol.Contestant"
+				default-impl="cn.saintshaga.SpringInAction.springidol.impl.GraciousContestant"
+			/>
+		</aop:aspect>
+	</aop:config>
+
+	<aop:config>
+		<aop:aspect ref="audience">
+			<aop:pointcut id="performance" expression="execution(* cn.saintshaga.SpringInAction.springidol.Performer.perform(..))" />
+			<aop:around pointcut-ref="performance"
+				method="watchPerformance" />
+		</aop:aspect>
+	</aop:config>
+ 	<aop:config>
+		<aop:aspect ref="magician">
+			<aop:pointcut 
+				expression="execution(* cn.saintshaga.SpringInAction.springidol.Thinker.thinkOfSomething(String)) and args(thoughts)" 
+				id="thinking"/>
+			<aop:before method="interceptThoughts" pointcut-ref="thinking" arg-names="thoughts"/>
+		</aop:aspect>
+	</aop:config>
+	 -->
+<!--	
 	<aop:config>
 		<aop:aspect ref="audience">
 			<aop:pointcut id="performance" expression="execution(* cn.saintshaga.SpringInAction.springidol.Performer.perform(..))" />
@@ -29,7 +56,7 @@
 
 		</aop:aspect>
 	</aop:config>
-<!--	<context:annotation-config />
+	<context:annotation-config />
  	
 	<bean id="duke" class="cn.saintshaga.SpringInAction.springidol.impl.Juggler">
 		<constructor-arg value="15" />

@@ -11,7 +11,9 @@ public class Main {
 		ApplicationContext context = new ClassPathXmlApplicationContext("cn/saintshaga/SpringInAction/springidol/Performer.xml");
 		Performer performer = (Performer)context.getBean("kenny");
 		performer.perform();
-				
+//		Thinker thinker = (Thinker)context.getBean("volunteer");
+//		thinker.thinkOfSomething("greet is good!");
+		((Contestant)performer).receiveAward();
 	}
 
 }
