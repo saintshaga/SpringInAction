@@ -4,7 +4,7 @@
 <!-- Generated 2014-1-22 15:39:11 by Hibernate Tools 3.4.0.CR1 -->
 <hibernate-mapping>
  <class name="cn.saintshaga.hibernate.hello.Message" table="MESSAGES">
-  <id column="MESSAGE_ID" name="id" type="java.lang.Long">
+  <id name="id" type="java.lang.Long" column = "MESSAGE_ID">
    <generator class="increment"/>
   </id>
   <property column="MESSAGE_TEXT" generated="never" lazy="false"
