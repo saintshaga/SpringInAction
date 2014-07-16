@@ -4,9 +4,8 @@ import javax.jms.Message;
 
 public class MessageAlertHandler{
 
-	public void onMessage(Message message) {
-		// TODO Auto-generated method stub
-
+	public void processMessage(String message) {
+		System.out.println(message);
 	}
 
 }

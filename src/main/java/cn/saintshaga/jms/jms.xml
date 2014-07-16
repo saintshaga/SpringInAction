@@ -19,7 +19,11 @@
 	<bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
 		<property name="connectionFactory" ref="connectionFactory" />
 		<property name="defaultDestinationName"
-					value="spittle.alert.queue"/>
+					value="spitter.alert.queue"/>
 	</bean>
 	<bean id="service" class="cn.saintshaga.jms.impl.AlertServiceImpl"></bean>
+	<bean id="messageHandler" class="cn.saintshaga.jms.MessageAlertHandler"></bean>
+	<jms:listener-container connection-factory="connectionFactory">
+		<jms:listener destination="spitter.alert.queue" ref="messageHandler" method="processMessage" />
+	</jms:listener-container>
 </beans>
